@@ -107,18 +107,30 @@ class TaskManager {
         /*
         <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm" ></i></a>
         */
-        
-        const deleteButton = document.createElement('a');
-        deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-        deleteButton.addEventListener('click', function() {
-            taskManager.removeTask(task.id);
-        });
-        eleCardBody.appendChild(deleteButton);
-        const i = document.createElement('i');
-        i.classList.add('fas', 'fa-trash', 'fa-sm');
-        deleteButton.appendChild(i);
-        return eleCard;
-    }
+         const deleteButton = document.createElement('a');
+   deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+   deleteButton.addEventListener('click', function() {
+    eleCard.remove();
+    removeFromArray(task.id);
+  });
+  const markasdone = document.createElement('button');
+  markasdone.innerText= 'Mark as done'
+  markasdone.id = "markdone";
+  markasdone.classList.add('btn', 'btn-primary', 'btn-sm');
+   markasdone.addEventListener('click', function() {
+    task.status = "Done";  
+    eleCardStatus.textContent = `Task Status: ${task.status}`;
+    // document.getElementById("markdone").style.visibility = 'hidden'; 
+    eleCardBody.removeChild(markasdone);
+  });
+   eleCardBody.appendChild(deleteButton);
+   const i = document.createElement('i');
+   i.classList.add('fas', 'fa-trash', 'fa-sm');
+   deleteButton.appendChild(i);
+   eleCardBody.appendChild(markasdone);
+   cardId++;
+    return eleCard;
+    
   
     appendCardElement(cardElement) {
       const cardDeck = document.getElementById('card-deck');
